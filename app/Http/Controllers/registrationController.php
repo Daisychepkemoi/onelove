@@ -11,8 +11,8 @@ use App\Proposal;
 class registrationController extends Controller
 {
     public function __construct(){
-        // $this->middleware('auth');
-        // $this->middleware('guest', ['except'=>'create','store','activate']);
+         // $this->middleware('auth');
+        $this->middleware('guest', ['except'=>'store','create']);
     }
       
     public function create()

@@ -6,14 +6,13 @@
        <div class="navsbars">
 
 <div class="col-sm-8 blog-main">
-	<h1>One Love</h1>
-	<hr>
+	
+	  <h1>Log In</h1>
+<hr>
 
 	
 <div class="col-ml-8">
-  <h1>Log In</h1>
-
-
+  
 <form method="POST" action="/login" >
     {{ csrf_field() }}
   <div class="form-group">

@@ -4,7 +4,7 @@
   <div class="contents">
     <div class="containers">
    
-<div class="panel-group">
+<div class="panel-group" id="all">
  
       <div class="panel-body">
         <div class="notify">
