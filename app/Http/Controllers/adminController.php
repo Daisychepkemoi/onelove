@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Proposal;
+use App\proposal;
 use App\Notifications\acceptorreject;
 // use App\User;
 

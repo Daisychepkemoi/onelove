@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Proposal;
+use App\proposal;
 
 class usersController extends Controller
 {

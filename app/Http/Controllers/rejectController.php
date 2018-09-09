@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Notifications\acceptorreject;
-use App\Proposal;
+use App\proposal;
 
 class rejectController extends Controller
 {
