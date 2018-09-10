@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'proposalController@index')->name('home'); 
+Route::get('/', 'ProposalController@index')->name('home'); 
 Route::get('/proposal', 'ProposalController@create'); 
 Route::get('/userproposal', 'ProposalController@view'); 
 
