@@ -16,7 +16,8 @@
       					<h6><a href="/stageoneuser">Stage-1</a></h6>
       					<hr>
       					
-      					 <h6><a href="/stagetwouser">Stage-2</a><hr></h6>
+                 <h6><a href="/stagetwouser">Stage-2</a><hr></h6>
+      					 <h6><a href="/accepteduser">Accepted</a><hr></h6>
       					 <hr>
       					<h6><a href="/rejecteduser">Rejected</a> <hr></h6>
       				
