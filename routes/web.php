@@ -12,10 +12,10 @@
 */
 
 Route::get('/', 'proposalController@index')->name('home'); 
-Route::get('/proposal', 'proposalController@create'); 
-Route::get('/userproposal', 'proposalController@view'); 
+Route::get('/proposal', 'ProposalController@create'); 
+Route::get('/userproposal', 'ProposalController@view'); 
 
-Route::get('/userproposal/{id}', 'proposalController@open'); 
+Route::get('/userproposal/{id}', 'ProposalController@open'); 
 Route::get('/login', 'sessionsController@create')->name('login'); 
 Route::post('/login', 'sessionsController@store'); 
 Route::get('/logout', 'sessionsController@destroy'); 
@@ -32,7 +32,7 @@ Route::get('/admin/{id}','adminController@show');
 
 Route::get('/admin/{id}/stage1','adminController@update');
 Route::get('/admin/{id}/stage2','stage3Controller@update');
-Route::get('/admin/{id}/reject','proposalController@update');
+Route::get('/admin/{id}/reject','ProposalController@update');
 Route::get('/admin/{id}/accepted','acceptController@update');
 Route::get('/rejected','adminController@rejected');
 Route::get('/stageone','adminController@stageone');
@@ -44,7 +44,7 @@ Route::get('/rejecteduser','usersController@rejected');
 
 Route::get('/stageoneuser','usersController@stageoneuser');
 Route::get('/stagetwouser','usersController@stagetwouser');
-Route::get('/sentproposals','proposalController@view');
+Route::get('/sentproposals','ProposalController@view');
 Route::get('/accepteduser','usersController@accepteduser');
 Route::get('/userback','usersController@userback');
 
