@@ -12,22 +12,14 @@ class stage3Controller extends Controller
     {
          $users=auth()->user();
 
-             $proposi = Proposal::where('id', $request->id)->first();
+         $proposi = Proposal::where('id', $request->id)->first();
 
-            
-        
-        $proposi->stage='stagetwo';
+         $proposi->stage='stagetwo';
        
         $proposi->save();
-         $users->notify(new acceptorreject($proposal));
+        $users->notify(new acceptorreject($proposal));
         
         return redirect('/admin');
+	}
 
-
-
-        
-        
-    }
-
-   
 }

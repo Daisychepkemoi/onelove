@@ -5,72 +5,80 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\proposal;
 use App\Notifications\acceptorreject;
-// use App\User;
+
 
 class adminController extends Controller
 {
-     public function __construct(){
-    // $this->middleware('auth')->except(['index']);
-        $this->middleware('auth');
-  }
-    public function create(){
+     public function __construct()
+        {
+    
+            $this->middleware('auth');
+        }
+    public function create()
+        {
     	
-    		$proposal=Proposal::latest()->get();
+    	   $proposal=Proposal::latest()->get();
     	
-    	return view('partials.adminside',compact('proposal'));
-    }
-    public function show(Proposal $proposal){
+    	   return view('partials.adminside',compact('proposal'));
+         }
+    public function show(Proposal $proposal)
+        {
     	
-    	  $propos = Proposal::where('id', request('id'))->get();
+    	    $propos = Proposal::where('id', request('id'))->get();
          
 
-    	return  view('admin.move',compact('propos'));
+    	   return  view('admin.move',compact('propos'));
     	
-    }
+         }
 
-     public function rejected(Proposal $proposal){
+     public function rejected(Proposal $proposal)
+        {
             $proposal=Proposal::where('stage','reject')->get();
             
             return view('partials.adminside',compact('proposal'));
         }
-        public function stageone(Proposal $proposal){
+     public function stageone(Proposal $proposal)
+        {
             $proposal=Proposal::where('stage','stageone')->get();
             
             return view('partials.adminside',compact('proposal'));
         }
-         public function stagetwo(Proposal $proposal){
+     public function stagetwo(Proposal $proposal)
+        {
             $proposal=Proposal::where('stage','stagetwo')->get();
             return view('partials.adminside',compact('proposal'));
         }
-         public function newProposals(Proposal $proposal){
+    public function newProposals(Proposal $proposal)
+        {
+
             $proposal=Proposal::whereNull('stage')->get();
            
             return view('partials.adminside',compact('proposal'));
         }
-        public function accepted(Proposal $proposal){
+        
+    public function accepted(Proposal $proposal)
+        {
             $proposal=Proposal::where('stage','Accepted')->get();
            
             return view('partials.adminside',compact('proposal'));
         }
     public function update(Request $request, proposal $proposal)
-    {
-        $users=auth()->user();
+        {   
+            $users=auth()->user();
           
 
-             $proposi = Proposal::where('id', $request->id)->first();
+            $proposi = Proposal::where('id', $request->id)->first();
 
-            
-
+            $proposi->stage='stageone';
         
-        $proposi->stage='stageone';
-        
-        $proposi->save();
-         $users->notify(new acceptorreject($proposal));
+            $proposi->save();
+            $users->notify(new acceptorreject($proposal));
       
-        return redirect('/admin');
+            return redirect('/admin');
 
         }
-        public function backs(){
+    public function backs()
+        {
             return redirect('/admin');
         }
 

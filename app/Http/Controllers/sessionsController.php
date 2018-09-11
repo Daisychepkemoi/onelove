@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\proposal;
 
 class sessionsController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         // $this->middleware('auth', ['except'=>'destroy']);
     }
       
@@ -19,35 +21,53 @@ class sessionsController extends Controller
     public function store()
     {
        
-        if ( auth()->attempt(request(['email', 'password']))== false) {
+        if ( auth()->attempt(request(['email', 'password']))== false) 
+        {
             return back()->withErrors([
                 'message' => 'The email or password is incorrect, please try again'
             ]);
         }
-        else{
+        else
+        {
             $request=request();
              $users = User::where('email', $request->email)->first();
              $use=$users->is_admin;
 
-            // $users=User::get(['verified']);
-           if($use == true) {
+            
+           if($use == true) 
+           {
              
-            // dd($use,'jhgffdh');
-            // dd($users->is_admin);
+            
             return redirect('/admin');
            }
-           else{
-           // dd($users->is_admin,'hellokenya');
-           return redirect('/userproposal');
-       }
+           else
+           {
+                
+             if(! ($users->verified==1))
+                {
+                     auth()->login($users);
+                     $users=User::where('email', $request->email)->get();
+                            
+                     return view('session.unverified',compact('users'));
+                                
+                }
+             else
+                {
+
+                 auth()->login($users);
+
+                 $users=auth()->user();
+                 $proposal = Proposal::latest()->where('Submitted_by',$users->email)->get();
+                 return redirect('/userproposal');
+                }
+           
+            }
         }
         
         
     }
 
-   
-    
-    public function destroy()
+   public function destroy()
     {
         auth()->logout();
         

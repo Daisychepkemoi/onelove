@@ -2,12 +2,13 @@
 @section('content')
 <div class="contents">
     <div class="containers">
-       <!-- <div class="navsbars"> -->
+      
 <div class="panel-group">
     <div class="panel panel-default">
       <div class="panel-body">
       	<div class="notify">
-      		<div class="panel-heading">Admin Dashboard </div>
+      		<div class="panel-heading">Admin Dashboard 
+          </div>
       		
 			    
 			      <div class="panel-body" id="contentse">
@@ -24,7 +25,7 @@
       				
       					
       		
-      		</div>
+      		  </div>
       	</div>
 
       
@@ -35,25 +36,25 @@
       			<div class="panel-body" id="contentss">
 
 
-      				<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Title</th>
-      <th scope="col">Organisation_Name</th>
-      <th scope="col">Submitted_by</th>
-      <th scope="col">Created </th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
+      			   <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Organisation_Name</th>
+                    <th scope="col">Submitted_by</th>
+                    <th scope="col">Created </th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
 
-     @foreach ($proposal as $propose)
+                  @foreach ($proposal as $propose)
 
-     @include('admin.admin')
-        @endforeach
-  </tbody>
-</table>
+                    @include('admin.admin')
+                  @endforeach
+                </tbody>
+               </table>
 
 
 
@@ -64,8 +65,7 @@
       </div>
     </div>
 
-    </div>
-</div>
+  
 
 
 

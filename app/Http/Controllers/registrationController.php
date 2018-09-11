@@ -10,9 +10,10 @@ use App\proposal;
 
 class registrationController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
          // $this->middleware('auth');
-        $this->middleware('guest', ['except'=>'store','create']);
+        $this->middleware('guest', ['except'=>'activate','create','store']);
     }
       
     public function create()
@@ -20,38 +21,64 @@ class registrationController extends Controller
         return view('register.signin');
     }
 
-    public function store(){
+    public function store( Request $request)
+    {
 
-  $this->validate(request(),['name'=>'required',
-'email'=>'required|email',
-'password'=>'required|confirmed'
+         $this->validate(request(),['name'=>'required',
+                'email'=>'required|email',
+                'password'=>'required|confirmed'
     		]);
         $user=User::create(request(['name','email','password']));
+
     	
-        if(! ($user->verified==0)){
-            return view('partials.adminside',compact('user'));
+        if(! ($user->verified==1))
+        {
+                    auth()->login($user);
+            $users=User::where('email', $request->email)->get();
+         
+    
+                \Mail::to($users)->send(new welcomeagain($users));
+                // dd($users->name);
+            return view('session.unverified',compact('users'));
+
             
         }
-        else{
+        else
+        {
 
     	auth()->login($user);
 
         $users=auth()->user();
         $proposal = Proposal::latest()->where('Submitted_by',$users->email)->get();
-    	 // dd('jhgfcgvhb');
+    	 
         return redirect('/userproposal');
-    	 // return view('user.user',compact('proposal','users'));
+    	 
     
-}
+        }
     
     }
-    public function activate(){
-        $user=User::update(['verified' => 1]);
-         // $verifyUser->user->verified = 1;
-        $user=save();
-        return redirect('/login');
+    public function update(request $request)
+    {
+
+        // $user=auth()->user();
+
+         $user=User::where('id', $request->id)->first();
+
+         $user->verified=true;
+       
+        $user->save();
+        // dd($user->verified);
+        return redirect('/login')->with('message', 'Account successfully activated!');
+    }
+    public function activate(request $request)
+    {
+         $user=auth()->user();
+      
+         // $user=User::where('id', $request->id)->first();
+         // dd($user);
+        return view('email.welcome',compact('user'));
     }
 
-    }
+ }
 
 

@@ -357,6 +357,14 @@ ins del {
   background-color: #0F0F0F;
   /*position: relative;*/
  }
+   .mainboddy{
+  margin-top: 100px;
+  width: 60%;
+  margin-left: 20%;
+  min-height: 400px;
+  background-color: white;
+  /*position: relative;*/
+ }
   
 .foots .copyright{
   min-height: 20%;
