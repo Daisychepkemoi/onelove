@@ -4,7 +4,11 @@
   
  <div class="contents">
    
-     
+       @if (session()->has('success'))
+                  <div class="alert alert-info">
+                      {{ session('success') }}
+                  </div>
+              @endif
         <hr>
         <div class="mainboddy"> 
              <div class="navsbarr">

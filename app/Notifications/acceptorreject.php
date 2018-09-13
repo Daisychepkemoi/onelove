@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Proposal;
+use App\User;
 
 class acceptorreject extends Notification
 {
@@ -43,11 +44,13 @@ class acceptorreject extends Notification
     {   
 
         $proposal=Proposal::where('id',request('id'))->first();
-        $name=aUth()->user()->name;
+        $pro=$proposal->Submitted_by;
+        $users=User::where('email',$pro)->first();
+        $user=$users->name;
         $stage=$proposal->stage;
         $url=('/userproposal/'.$proposal->id);
         return (new MailMessage)
-                    ->line('Hi $name Your Proposal has been $stage Please click the link below to check it.')
+                    ->line('Hi  '.$user.'  Your Proposal has been '.$stage.' Please click the link below to check it.')
                     ->action('Check Proposal', url($url))
                     ->line('Thank you for giving us Your Proposal to review!');
     }
@@ -61,7 +64,7 @@ class acceptorreject extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            
         ];
     }
 }

@@ -12,6 +12,7 @@ class HomeController extends Controller
      *
      * @return void
      */
+   
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,20 +28,6 @@ class HomeController extends Controller
         return view('session.create');
     }
 
-    public function update(request $request)
-    {
-         $users=auth()->user();
-          
-
-        $proposi = Proposal::where('email', $users->email)->first();
-
-        $proposi->draft=false;
     
-        $proposi->save();
-        // 
-        // dd($proposi->draft);
-      
-        return redirect('/userproposal');
-    }
 }
 

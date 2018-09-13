@@ -60,22 +60,20 @@ class registrationController extends Controller
     public function update(request $request)
     {
 
-        // $user=auth()->user();
+
 
          $user=User::where('id', $request->id)->first();
 
-         $user->verified=true;
+         $user->verified=1;
        
         $user->save();
-        // dd($user->verified);
+       // dd($user);
         return redirect('/login')->with('message', 'Account successfully activated!');
     }
     public function activate(request $request)
     {
          $user=auth()->user();
-      
-         // $user=User::where('id', $request->id)->first();
-         // dd($user);
+
         return view('email.welcome',compact('user'));
     }
 

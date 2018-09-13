@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('content')
 <div class="contents">
+
+   @if($users->verified==true)
+
     <div class="containers">
        
         <div class="panel-group">
@@ -54,7 +57,7 @@
                             <th scope="col">Title</th>
                             <th scope="col">Organisation_Name</th>
                             <th scope="col">Submitted_by</th>
-                            <th scope="col">Created On</th>
+                            <th scope="col">Last Updated</th>
                             <th scope="col">Status</th>
                             <th scope="col"></th>
                           </tr>
@@ -67,7 +70,8 @@
                                 <td> <a href="/userproposal/{{$propose->id}}">{{$propose->title}}</a> </td>
                                 <td>{{$propose->organization}}</td>
                                 <td>{{$propose->Submitted_by}}</td>
-                                <td>{{$propose->created_at->diffForHumans()}}</td>
+                               
+                                <td>{{$propose->updated_at->diffForHumans()}}</td>
                               @if($propose->draft==1)
                                 <td><button class="btn btn-primary">Pending </button></td>
                               @else
@@ -91,6 +95,22 @@
         </div>
 
     </div>
+    @else
+     <hr>
+        <div class="mainboddy"> 
+             <div class="navsbarr">
+
+              
+
+               <h3> Welcome to One Love website {{$users->name}}.<br>Your account isn't activated.</h3>
+                
+               <h3>Please check your email to <strong>Activate</strong> your account.</h3>
+                
+               
+              </div>
+            
+        </div>
+        @endif
 </div>
 
 

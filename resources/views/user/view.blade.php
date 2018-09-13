@@ -1,7 +1,12 @@
 @extends('layouts.master')
 @section('content')
 <div class="contents">
-    <div class="containers">
+
+
+   @if($users->verified==true)
+     @foreach ($propos as $propose)
+      @if($users->email==$propose->Submitted_by)
+            <div class="containers">
       
         <div class="panel-group">
  
@@ -13,25 +18,25 @@
       		
 			    
 			          <div class="panel-body" id="contentse">
-      					<h6><a href="/newproposals">New Proposals</a></h6>
-      					<hr>
-                <h6><a href="/userdrafts">Drafts</a></h6>
-                <hr>
+              					<h6><a href="/newproposals">New Proposals</a></h6>
+              					<hr>
+                        <h6><a href="/userdrafts">Drafts</a></h6>
+                        <hr>
 
-      					<h6><a href="/stageoneuser">Stage-1</a></h6>
-      					<hr>
-      					
-                <h6><a href="/stagetwouser">Stage-2</a><hr></h6>
-      					<h6><a href="/accepteduser">Accepted</a><hr></h6>
-      					<hr>
-      					<h6><a href="/rejecteduser">Rejected</a> <hr></h6>
+              					<h6><a href="/stageoneuser">Stage-1</a></h6>
+              					<hr>
+              					
+                        <h6><a href="/stagetwouser">Stage-2</a><hr></h6>
+              					<h6><a href="/accepteduser">Accepted</a><hr></h6>
+              					<hr>
+              					<h6><a href="/rejecteduser">Rejected</a> <hr></h6>
       				
       		      </div>
       	       </div>
 
       
                 <div class="notifycontent">
-          		 @foreach ($propos as $propose)
+          		 
                   @if($propose->stage == 'stageone')
 
                         <div class="panel-heading"><h2 id="titl">Stage-1  Proposal</h2> </div>
@@ -45,10 +50,12 @@
                           <div class="panel-heading"><h2 id="titl">Rejected  Proposal</h2></div>
                   @endif
 
+
+
       			             <div class="panel-body" id="contentss">
                                 @if($propose->draft==1)
                                <div class="col-sm-8">
-                                   <form method="POST" action="/proposal">
+                                   <form method="POST" action="/submitchange/{{$propose->id}}">
                                     {{ csrf_field() }}
                                         <div class="form-group">
                                           <label for="title">Title : <strong>*</strong></label>
@@ -109,10 +116,10 @@
                                            </div>
 
                                           
-                                          <button type="submit" name="publish" value="save" class="btn btn-primary">Submit</button> 
+                                          <button type="submit" name="save" value="savedraft" class="btn btn-primary"><a href=""></a>Submit</button> 
                                       
-                                          <button type="submit" name="publish" value="editdraft" class="btn btn-primary">save changes as Draft</button> 
-                                          <button type="submit" name="publish" value="editdraft" class="btn btn-danger">delete</button> 
+                                          <button type="submit" name="save" value="editdraft" class="btn btn-primary">save changes as Draft</button> 
+                                          <button type="submit" name="save" value="deletedraft" class="btn btn-danger">delete</button> 
                           
                                           @include('layouts.errors')
                                     </form>
@@ -141,15 +148,51 @@
                               </div>
 
                         </div>
-                @endforeach
+               
       	       </div>
             </div>
 
     
         </div>
+       @else
+          <hr>
+        <div class="mainboddy"> 
+             <div class="navsbarr">
 
-    </div>
+
+                <h2>Access denied</h2>
+               <h3> You are not listed as a collaborator in this proposal</h3>
+                
+               
+                
+               
+              </div>
+             
+        </div>
+        @endif
+
+         @endforeach
+
+      @else
+
+     <hr>
+        <div class="mainboddy"> 
+             <div class="navsbarr">
+
+
+
+               <h3> Welcome to One Love website <i>{{$users->name}}.</i><br>Your account isn't activated.</h3>
+                
+               <h3>Please check your email to <strong>Activate</strong> your account.</h3>
+                
+               
+              </div>
+             
+        </div>
+        @endif
+        
 </div>
+
 
 
 

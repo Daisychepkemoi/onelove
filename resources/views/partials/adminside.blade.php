@@ -5,6 +5,7 @@
       
 <div class="panel-group">
     <div class="panel panel-default">
+      @if($users->is_admin==1)
       <div class="panel-body">
       	<div class="notify">
       		<div class="panel-heading">Admin Dashboard 
@@ -30,6 +31,11 @@
 
       
       	<div class="notifycontent">
+           @if (session()->has('success'))
+                  <div class="alert alert-info">
+                      {{ session('success') }}
+                  </div>
+              @endif
       		
       			<div class="panel-heading">Proposals</div>
       			
@@ -43,7 +49,9 @@
                     <th scope="col">Title</th>
                     <th scope="col">Organisation_Name</th>
                     <th scope="col">Submitted_by</th>
+                
                     <th scope="col">Created </th>
+                    <th scope="col">stage</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -61,6 +69,31 @@
             </div>
           </div>
         </div>
+        @else
+        <div class="panel-body">
+           <div class="notify">
+ 
+            </div>
+
+        <div class="notifycontent">
+          <div class="panel-body" id="contentss">
+
+               
+                           <div class="navsbar">
+                             <h2></h2>
+                             <h2>Access Denied.
+                               
+                              </h2>
+                              
+                            </div>
+            
+
+
+
+            </div>
+          </div>
+        </div>
+        @endif
 
       </div>
     </div>

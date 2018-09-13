@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="contents">
+  @if($users->verified==true)
     <div class="containers">
        
           <div class="panel-group">
@@ -28,6 +29,11 @@
 
               
                 	<div class="notifycontent">
+                     @if (session()->has('success'))
+                        <div class="alert alert-info">
+                            {{ session('success') }}
+                        </div>
+                      @endif
                 		
                 			<div class="panel-heading">Proposals</div>
               	      <div class="panel-body" id="contentss">
@@ -45,6 +51,23 @@
           </div>
 
     </div>
+    @else
+     <hr>
+        <div class="mainboddy"> 
+             <div class="navsbarr">
+
+              
+
+
+               <h3> Welcome to One Love website {{$users->name}} <br>Your account isn't activated.</h3>
+                
+               <h3>Please check your email to <strong>Activate</strong> your account.</h3>
+                
+               
+              </div>
+             
+        </div>
+     @endif
 </div>
 
 
