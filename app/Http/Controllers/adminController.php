@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\proposal;
-use App\Notifications\AcceptOrReject;
+use App\Notifications\acceptoreject;
 use Illuminate\Support\Facades\DB;
 
 
@@ -72,7 +72,7 @@ class adminController extends Controller
         {   
              $users=auth()->user();
            $pro=DB::table('proposals')->where('id', $request->id)->update(['stage' => 'stageone']);
-            $users->notify(new AcceptOrReject($proposal));
+            $users->notify(new acceptoreject($proposal));
          
 
         return redirect('/admin')->with('success', 'Proposal moved to stage one successfully');
@@ -90,7 +90,7 @@ class adminController extends Controller
    
         $pro=DB::table('proposals')->where('id', $request->id)->update(['stage' => 'reject']);
         
-       $users->notify(new AcceptOrReject($proposal));
+       $users->notify(new acceptoreject($proposal));
         
         return redirect('/admin')->with('success', 'Proposal rejected successfully');
 
@@ -100,7 +100,7 @@ class adminController extends Controller
         $users=auth()->user();
         $pro=DB::table('proposals')->where('id', $request->id)->update(['stage' => 'stagetwo']);
         
-       $users->notify(new AcceptOrReject($proposal));
+       $users->notify(new acceptoreject($proposal));
         return redirect('/admin')->with('success', 'Proposal moved to stage two successfully');
     }
      public function accept(request $request, $id,Proposal $proposal)
@@ -108,7 +108,7 @@ class adminController extends Controller
         $users=auth()->user();
         $pro=DB::table('proposals')->where('id', $request->id)->update(['stage' => 'Accepted']);
         
-       $users->notify(new AcceptOrReject($proposal));
+       $users->notify(new acceptoreject($proposal));
         return redirect('/admin')->with('success', 'Proposal accepted successfully');
     }
     
