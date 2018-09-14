@@ -16,13 +16,13 @@ Route::get('/proposal', 'ProposalController@create');
 Route::get('/userproposal', 'ProposalController@view'); 
 
 Route::get('/userproposal/{id}', 'ProposalController@open'); 
-Route::get('/login', 'SessionsController@create')->name('login'); 
-Route::post('/login', 'SessionsController@store'); 
-Route::get('/logout', 'SessionsController@destroy'); 
-Route::get('/register', 'RegistrationController@create'); 
-Route::get('/activate/{id}', 'RegistrationController@update'); 
-Route::get('/activate', 'RegistrationController@activate'); 
-Route::post('/register','RegistrationController@store');
+Route::get('/login', 'sessionsController@create')->name('login'); 
+Route::post('/login', 'sessionsController@store'); 
+Route::get('/logout', 'sessionsController@destroy'); 
+Route::get('/register', 'registrationController@create'); 
+Route::get('/activate/{id}', 'registrationController@update'); 
+Route::get('/activate', 'registrationController@activate'); 
+Route::post('/register','registrationController@store');
 Route::get('/proposal','ProposalController@create');
 Route::post('/proposal','ProposalController@store');
 
@@ -35,28 +35,28 @@ Route::get('/deletedraft/{id}','ProposalController@destroy');
 // Route::get('/submitproposal','ProposalController@update');
 
 
-Route::get('/admin','AdminController@create');
-Route::get('/admin/{id}','AdminController@show');
+Route::get('/admin','adminController@create');
+Route::get('/admin/{id}','adminController@show');
 
-Route::get('/admin/{id}/stage1','AdminController@stage1');
-Route::get('/admin/{id}/stage2','AdminController@stage2');
-Route::get('/admin/{id}/reject','AdminController@reject');
-Route::get('/admin/{id}/accepted','AdminController@accept');
+Route::get('/admin/{id}/stage1','adminController@stage1');
+Route::get('/admin/{id}/stage2','adminController@stage2');
+Route::get('/admin/{id}/reject','adminController@reject');
+Route::get('/admin/{id}/accepted','adminController@accept');
 
-Route::get('/rejected','AdminController@rejected');
-Route::get('/stageone','AdminController@stageone');
-Route::get('/stagetwo','AdminController@stagetwo');
-Route::get('/accepted','AdminController@accepted');
-Route::get('/newproposals','AdminController@newproposals');
-Route::get('/back','AdminController@backs');
+Route::get('/rejected','adminController@rejected');
+Route::get('/stageone','adminController@stageone');
+Route::get('/stagetwo','adminController@stagetwo');
+Route::get('/accepted','adminController@accepted');
+Route::get('/newproposals','adminController@newproposals');
+Route::get('/back','adminController@backs');
 
-Route::get('/rejecteduser','UsersController@rejected');
-Route::get('/stageoneuser','UsersController@stageoneuser');
-Route::get('/stagetwouser','UsersController@stagetwouser');
+Route::get('/rejecteduser','usersController@rejected');
+Route::get('/stageoneuser','usersController@stageoneuser');
+Route::get('/stagetwouser','usersController@stagetwouser');
 Route::get('/sentproposals','ProposalController@view');
-Route::get('/accepteduser','UsersController@accepteduser');
-Route::get('/userback','UsersController@userback');
-Route::get('/userdrafts','UsersController@userdrafts');
+Route::get('/accepteduser','usersController@accepteduser');
+Route::get('/userback','usersController@userback');
+Route::get('/userdrafts','usersController@userdrafts');
 Route::post('/submitchange/{id}','ProposalController@update');
 
 
