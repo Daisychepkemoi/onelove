@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Proposal;
+use App\proposal;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
