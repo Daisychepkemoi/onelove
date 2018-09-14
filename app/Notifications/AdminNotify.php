@@ -5,13 +5,13 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\DB;
 use App\Proposal;
 use App\User;
 
 
-class acceptorreject extends Notification
+class adminnotify extends Notification
 {
     use Queueable;
 
@@ -43,18 +43,19 @@ class acceptorreject extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {   
-
+    {
         $proposal=Proposal::where('id',request('id'))->first();
-        $pro=$proposal->Submitted_by;
-        $users=User::where('email',$pro)->first();
-        $user=$users->name;
-        $stage=$proposal->stage;
-        $url=('/userproposal/'.$proposal->id);
+        
+         $pro=DB::table('Users')->where('is_admin', true)->first();
+        $propo=$pro->name;
+
+        $url=('/admin/'.$proposal);
+        dd($proposal);
         return (new MailMessage)
-                    ->line('Hi  '.$user.'  Your Proposal has been '.$stage.' Please click the link below to check it.')
-                    ->action('Check Proposal', url($url))
-                    ->line('Thank you for giving us Your Proposal to review!');
+                    ->line('Hi  '.$propo.' , a new proposal has been submitted.')
+                    ->action('Click this link to view it.', url($url))
+                    ->line('From One Love!');
+             
     }
 
     /**
@@ -66,7 +67,7 @@ class acceptorreject extends Notification
     public function toArray($notifiable)
     {
         return [
-            
+            //
         ];
     }
 }

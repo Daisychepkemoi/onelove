@@ -81,7 +81,8 @@
                
                            <div class="navsbar">
                              <h2></h2>
-                             <h2>Access Denied.
+                             <h2>
+                                  Access Denied.
                                
                               </h2>
                               

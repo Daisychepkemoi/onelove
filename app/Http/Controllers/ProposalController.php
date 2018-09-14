@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\proposal;
+use App\Proposal;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Notifications\acceptorreject;
+// use App\Notifications\acceptorreject;
+use App\Notifications\adminnotify;
+Use App\Http\Controllers\Notification;
 
 class ProposalController extends Controller
 {
@@ -69,18 +71,22 @@ class ProposalController extends Controller
 
             switch ($request->input('publish')) {
             case 'save':
-              $id=$draft->id;
-            
-                return redirect()->to('/submitproposal/'.$id)->with('success','Proposal Submitted Successfully');
-                break;
+                      $id=$draft->id;
+                          
+                      $users=DB::table('Users')->where('is_admin', true)->first();
+                      $proposal=DB::table('Proposals')->where('id', $id)->first();
+                       // \Notification::send($users, new AdminNotify($proposal));
+                        // dd($draft->id);
+                      return redirect()->to('/submitproposal/'.$id)->with('success','Proposal Submitted Successfully');
+                      break;
 
             case 'draft':
-             $id=$draft->id;
-            // dd($id);
-              return redirect()->to('/draft/'.$id);
-                break;
+                     $id=$draft->id;
+                    
+                      return redirect()->to('/draft/'.$id);
+                      break;
 
-           
+                   
                 }
 
         
@@ -166,12 +172,7 @@ class ProposalController extends Controller
         $users=auth()->user();
          
            $pro=DB::table('proposals')->where('id', $request->id)->delete();
-        // $proposal->delete();
-         // dd($pro);
-        // return redirect()->route('home')->with('success', 'Proposal deleted successfully');
-        // $proposal=Proposal::where('id', $request->id)->first();
         
-       
         return redirect('/userproposal')->with('success', 'Draft deleted successfully');
     }
    
@@ -185,7 +186,6 @@ class ProposalController extends Controller
         $proposal->email=$request->get('email');
         $proposal->Submitted_by=$request->get('Submitted_by');
         $proposal->Background=$request->get('Background');
-        // $proposal->summary=$request->get('summary');
         $proposal->activities=$request->get('activities');
         $proposal->Summary=$request->get('Summary');
         $proposal->budget=$request->get('budget');
@@ -195,19 +195,17 @@ class ProposalController extends Controller
         $id=$proposal->id;
          switch ($request->input('save')) {
             case 'savedraft':
-                // return redirect()->('/submitproposal/{id}');
-            // dd($id);
-                 return redirect()->to('/submittproposal/'.$id)->with('success','Proposal Submitted Successfully');
-                break;
+          
+                  return redirect()->to('/submittproposal/'.$id)->with('success','Proposal Submitted Successfully');
+                  break;
 
             case 'editdraft':
-                // return redirect('/draft');
-            // dd($id);
-             return redirect()->to('/drafts/'.$id)->with('success','saved as draft Successfully');
-                break;
+               
+                  return redirect()->to('/drafts/'.$id)->with('success','saved as draft Successfully');
+                  break;
             case 'deletedraft':
-                return redirect('/deletedraft/'.$id)->with('success','Draft deleted Successfully');
-                break;
+                    return redirect('/deletedraft/'.$id)->with('success','Draft deleted Successfully');
+                    break;
                 }
         
         

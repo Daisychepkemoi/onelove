@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Mail\welcomeagain;
 use Illuminate\Http\Request;
 use App\User;
-use App\proposal;
+use App\Proposal;
 
 
 

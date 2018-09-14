@@ -17,7 +17,7 @@ class CreateProposalsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('organization');
-            $table->string('Summary');
+            $table->text('Summary');
             $table->string('address');
             $table->integer('phone');
             $table->string('email');

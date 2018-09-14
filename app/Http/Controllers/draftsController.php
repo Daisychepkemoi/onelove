@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\proposal;
+use App\Proposal;
 class draftsController extends Controller
 {
   public function update(request $request)
