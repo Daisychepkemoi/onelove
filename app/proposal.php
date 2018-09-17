@@ -12,9 +12,7 @@ class proposal extends Model
      } 
      public function user(){ 
      	
-     	return $this->hasMany(Proposal::class);
+     	return $this->belongsTo(User::class);
      }
-//      public function admin(){
-//      	return $this->hasMany(Proposal::class);
-     // }
+
 }

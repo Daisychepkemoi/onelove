@@ -17,13 +17,13 @@ class CreateProposalsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('organization');
-            $table->text('Summary');
+            $table->text('summary');
             $table->string('address');
             $table->integer('phone');
             $table->string('email');
-            $table->string('Submitted_by');
+            $table->string('submitted_by');
             
-            $table->text('Background');
+            $table->text('background');
           
             $table->text('activities');
             $table->integer('budget');

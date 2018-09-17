@@ -46,7 +46,7 @@ class acceptorreject extends Notification
     {   
 
         $proposal=Proposal::where('id',request('id'))->first();
-        $pro=$proposal->Submitted_by;
+        $pro=$proposal->submitted_by;
         $users=User::where('email',$pro)->first();
         $user=$users->name;
         $stage=$proposal->stage;

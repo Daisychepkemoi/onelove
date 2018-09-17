@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('content')
+
+ @if($users->is_admin==1)
+    @include('partials.adminside')
+    
+@else
 <div class="contents">
   @if($users->verified==true)
     <div class="containers">
@@ -69,6 +74,8 @@
         </div>
      @endif
 </div>
+
+@endif
 
 
 
